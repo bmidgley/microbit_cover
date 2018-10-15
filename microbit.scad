@@ -107,9 +107,8 @@ module fire_place() {
 		translate([0, -2*(fire_cell_w + fire_cell_off), 0]) button_row();
 	}
 	// Add standoffs
-	standoff();
-	mirror([1,0,0])
-			standoff();
+	//standoff();
+	//mirror([1,0,0]) standoff();
 	// Some measures to make sure its all working right :)
 	// color([1,0,0])
 		// cube([32,1,1], center=true);
