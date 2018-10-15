@@ -1,7 +1,7 @@
 // The Microbit is a cool new thing from eth BBC.
 // It runs micropython.
 
-// I wrote a flam simulator on it and this panel fits on top
+// I wrote a flame simulator on it and this panel fits on top
 // So you can adjust the parameters with the buttons and// see a diffuse fire display through the plastic shell
 
 
