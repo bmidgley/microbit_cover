@@ -1,3 +1,6 @@
+//!OpenSCAD
+// 2018-10-08 modified the "microbit diffuser" below to make the pixels more distinct -Brad
+
 // The Microbit is a cool new thing from eth BBC.
 // It runs micropython.
 
@@ -10,18 +13,20 @@ board_w = 52;    // Width of the Microbit
 board_h = 44;    // Height of the Microbit
 board_d = 1.7;   // Thickness of the circuit board
 standoff = 2;    // How far off does the fire_place stand from the board
-thickness = 1.5; // Thickness of the 3D print in general.
+thickness = 2.5; // Thickness of the 3D print in general.
 //
-fire_pane_w = 25;    // Height of the display LEDs
+fire_pane_w = 22;    // Height of the display LEDs
 fire_pane_h = 22;    // Width of the display LEDs
 fire_pane_off = 10;  // Distance from base to bottom of display recess
-fire_pane_d = 0.5;   // Thin section over the LEDs to diffuse them.
+fire_pane_d = 1;   // Thin section over the LEDs to diffuse them.
+fire_cell_w = 3.2; // width of each cell w = 5*w + 4*s
+fire_cell_off = 1; // distance between cells
 //
 button_off_w = 4;   // Offset of buttons from side
 button_off_h = 17;  // Offset of buttons from base of Microbit
 button_w = 8;       // Width of buttons
 //
-usb_w = 15;     // width of recess for the USB plug
+usb_w = 45;     // width of recess for the USB plug (15)
 
 
 Delta = 0.1; // used to make sure things overlap properly for a nice 3D model
@@ -68,7 +73,19 @@ module sides() {
 		cube([thickness, board_h+thickness, h ], center=true);
 }
 
-
+module button_row() {
+		translate([0,fire_pane_h,thickness/2-fire_pane_d])
+			cube([fire_cell_w,fire_cell_w,thickness], center=true);
+		translate([fire_cell_w + fire_cell_off,fire_pane_h,thickness/2-fire_pane_d])
+			cube([fire_cell_w,fire_cell_w,thickness], center=true);
+		translate([2*fire_cell_w + 2*fire_cell_off,fire_pane_h,thickness/2-fire_pane_d])
+			cube([fire_cell_w,fire_cell_w,thickness], center=true);
+		translate([-fire_cell_w - fire_cell_off,fire_pane_h,thickness/2-fire_pane_d])
+			cube([fire_cell_w,fire_cell_w,thickness], center=true);
+		translate([-2 * fire_cell_w - 2* fire_cell_off,fire_pane_h,thickness/2-fire_pane_d])
+			cube([fire_cell_w,fire_cell_w,thickness], center=true);
+    
+}
 //The entire object made of parts
 module fire_place() {
 	difference() {
@@ -83,8 +100,11 @@ module fire_place() {
 		mirror([1,0,0])
 			button();
 		// flame region
-		translate([0,fire_pane_h,thickness/2-fire_pane_d])
-			cube([fire_pane_w,fire_pane_h,thickness], center=true);
+		translate([0, 0, 0]) button_row();
+		translate([0, fire_cell_w + fire_cell_off, 0]) button_row();
+		translate([0, 2*(fire_cell_w + fire_cell_off), 0]) button_row();
+		translate([0, -1*(fire_cell_w + fire_cell_off), 0]) button_row();
+		translate([0, -2*(fire_cell_w + fire_cell_off), 0]) button_row();
 	}
 	// Add standoffs
 	standoff();
