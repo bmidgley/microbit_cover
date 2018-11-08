@@ -1,7 +1,7 @@
 //!OpenSCAD
 // 2018-10-08 modified the "microbit diffuser" below to make the pixels more distinct -Brad
 
-// The Microbit is a cool new thing from eth BBC.
+// The Microbit is a cool new thing from the BBC.
 // It runs micropython.
 
 // I wrote a flame simulator on it and this panel fits on top
@@ -10,7 +10,7 @@
 
 
 board_w = 52;    // Width of the Microbit
-board_h = 44;    // Height of the Microbit
+board_h = 35;    // Height of the Microbit
 board_d = 1.7;   // Thickness of the circuit board
 standoff = 2;    // How far off does the fire_place stand from the board
 thickness = 2.5; // Thickness of the 3D print in general.
@@ -75,15 +75,15 @@ module sides() {
 
 module button_row() {
 		translate([0,fire_pane_h,thickness/2-fire_pane_d])
-			cube([fire_cell_w,fire_cell_w,thickness], center=true);
+			cube([fire_cell_w,fire_cell_w,2*thickness], center=true);
 		translate([fire_cell_w + fire_cell_off,fire_pane_h,thickness/2-fire_pane_d])
-			cube([fire_cell_w,fire_cell_w,thickness], center=true);
+			cube([fire_cell_w,fire_cell_w,2*thickness], center=true);
 		translate([2*fire_cell_w + 2*fire_cell_off,fire_pane_h,thickness/2-fire_pane_d])
-			cube([fire_cell_w,fire_cell_w,thickness], center=true);
+			cube([fire_cell_w,fire_cell_w,2*thickness], center=true);
 		translate([-fire_cell_w - fire_cell_off,fire_pane_h,thickness/2-fire_pane_d])
-			cube([fire_cell_w,fire_cell_w,thickness], center=true);
+			cube([fire_cell_w,fire_cell_w,2*thickness], center=true);
 		translate([-2 * fire_cell_w - 2* fire_cell_off,fire_pane_h,thickness/2-fire_pane_d])
-			cube([fire_cell_w,fire_cell_w,thickness], center=true);
+			cube([fire_cell_w,fire_cell_w,2*thickness], center=true);
     
 }
 //The entire object made of parts
